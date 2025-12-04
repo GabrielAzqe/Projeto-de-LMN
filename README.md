@@ -1,5 +1,5 @@
-# 🌍 Agente de Viagens Inteligente — IA + Dados Reais  
-### *Projeto acadêmico baseado em PLN (UFABC – 2025.Q3)*  
+# 🌍 Agente de Viagens Inteligente 
+### *Projeto  em PLN (UFABC – 2025.Q3)*  
 
 <p align="center">
   <img src="https://img.icons8.com/external-flaticons-lineal-color-flat-icons/344/external-travel-vacation-planning-flaticons-lineal-color-flat-icons.png" width="140"/>
@@ -30,7 +30,7 @@ O agente produz:
 # 🧠 Arquitetura (LangChain + SerpAPI)
 
 <p align="center">
-  <img src="https://i.imgur.com/rOfCqQb.png" width="85%"/>
+  <img src="https://iacomcafe.com.br/wp-content/uploads/2024/08/1_q1CkGPwS7g4-f9rNbPrkig.png" width="85%"/>
 </p>
 
 A arquitetura segue **4 grandes etapas**:
