@@ -120,10 +120,11 @@ Função: **`agente_de_viagens()`**
 ### 1. Configure suas chaves
 ```bash
 export GOOGLE_API_KEY="sua_google_ai_key"
-export SERPAPI_API_KEY="sua_serpapi_key"
+export SERPAPI_API_KEY="sua_serpapi_key" ```
 
+---
 
-📚 Relação com o Repositório (UFABC – 2025.Q3)
+# 📚 Relação com o Repositório (UFABC – 2025.Q3)
 
 Este projeto demonstra, na prática, os conceitos estudados em PLN:
 
@@ -139,7 +140,9 @@ Arquitetura modular
 
 Aplicações reais de PLN com dados externos
 
-🧑‍💻 Autores
+---
+
+# 🧑‍💻 Autores
 
 Leandro Cabral e Gabriel Azevedo
 Projeto desenvolvido no contexto do curso de PLN da UFABC.
