@@ -1,149 +1,152 @@
-# 🌍✨ Agente de Viagens com IA — Documentação Oficial
+# 🌍 Agente de Viagens Inteligente — IA + Dados Reais  
+### *Projeto acadêmico baseado em PLN (UFABC – 2025.Q3)*  
 
 <p align="center">
-  <img src="https://img.shields.io/badge/Python-3.10+-blue" />
-  <img src="https://img.shields.io/badge/Status-Ativo-brightgreen" />
-  <img src="https://img.shields.io/badge/IA-LangChain-orange" />
-  <img src="https://img.shields.io/badge/Google_Gemini-Suporte_Oficial-red" />
-</p>
-
-<p align="center">
-  <img src="https://github.com/adalves-ufabc/2025.Q3-PLN/raw/main/assets/nlp-banner.png" width="80%" />
+  <img src="https://img.icons8.com/external-flaticons-lineal-color-flat-icons/344/external-travel-vacation-planning-flaticons-lineal-color-flat-icons.png" width="140"/>
 </p>
 
 ---
 
-## 📘 Sobre o Projeto
+## ✨ Visão Geral
 
-Este repositório contém um **Agente de Viagens Inteligente** desenvolvido como parte do curso **Processamento de Linguagem Natural (PLN)** da UFABC — repositório base:
+Este projeto implementa um **agente inteligente de viagens**, combinando:
 
-🔗 **https://github.com/adalves-ufabc/2025.Q3-PLN**
+- **LLMs (Google Gemini via LangChain)**
+- **Consultas reais através da SerpAPI**
+- **Orquestração completa para gerar roteiros detalhados**
 
-O projeto demonstra:
+O agente produz:
 
-✔️ Uso de modelos de linguagem (LLMs)  
-✔️ Construção de agentes com LangChain  
-✔️ Ferramentas externas acopladas ao agente  
-✔️ Interação natural e objetiva com o usuário  
-✔️ Arquitetura modular seguindo boas práticas de PLN  
-
----
-
-## 🚀 Funcionalidades do Agente
-
-### 🤖 **Assistente de Viagem Inteligente**
-O agente responde perguntas sobre viagens, por exemplo:
-
-- “Quero fazer uma viagem para Santos amanhã.”  
-- “Quais opções de hospedagem perto da praia?”  
-- “Como está o tempo em Recife?”  
-
-### 🔎 **Ferramentas Integradas**
-O agente usa ferramentas do LangChain:
-
-| Ferramenta | Função |
-|-----------|--------|
-| 🦆 DuckDuckGoSearchRun | Busca online em tempo real |
-| 🌐 API de Contexto | Integra informações estruturadas |
-| 🧠 Modelo Google Gemini | Geração de linguagem natural |
+✔️ Datas ideais  
+✔️ Voos reais  
+✔️ Hotéis  
+✔️ Atrações personalizadas  
+✔️ Informações de câmbio  
+✔️ Contexto histórico do destino  
+✔️ Roteiro final completo baseado em dados reais  
 
 ---
 
-## 🧱 Arquitetura Técnica
+# 🧠 Arquitetura (LangChain + SerpAPI)
 
 <p align="center">
-  <img src="https://github.com/adalves-ufabc/2025.Q3-PLN/raw/main/assets/llm-architecture.png" width="75%" />
+  <img src="https://i.imgur.com/rOfCqQb.png" width="85%"/>
 </p>
 
-### 🔧 Pipeline Geral
-
-1. **Prompt do Usuário**  
-2. **Agente ReAct do LangChain**  
-3. **Ferramentas externas (Search / APIs)**  
-4. **Modelo Google Gemini**  
-5. **Resposta final organizada**
+A arquitetura segue **4 grandes etapas**:
 
 ---
 
-## 📂 Estrutura do Repositório
+## 1️⃣ Planejamento via LLM (LangChain)
 
-```
-📦 projeto-agente-viagens
-├── src/
-│   ├── agent.py
-│   ├── tools.py
-│   ├── prompts.py
-│   └── utils.py
-├── examples/
-│   └── demo.ipynb
-├── assets/
-│   ├── nlp-banner.png
-│   └── llm-architecture.png
-├── README.md
-└── requirements.txt
-```
+O modelo **Gemini 2.5 Flash** é utilizado para gerar:
+
+- Datas ideais de ida e volta  
+- Duração adequada da viagem  
+- Interesses turísticos personalizados  
+- Seleção de temporadas favoráveis  
+
+Função: **`gerar_dados_viagem()`**
 
 ---
 
-## 🧠 Conceitos de PLN Utilizados (do repositório base)
+## 2️⃣ Identificação de Aeroportos com LLM
 
-Todos retirados e alinhados com:  
-🔗 **https://github.com/adalves-ufabc/2025.Q3-PLN**
+O LLM identifica o **código IATA** do principal aeroporto de cada cidade.
 
-### 📌 Modelos de Linguagem Natural  
-- Tokenização  
-- Embeddings  
-- Atenção e Transformers  
-- Geração contextual  
-
-### 📌 Agentes e Cadeias  
-- LangChain ReAct  
-- Raciocínio passo a passo  
-- Ferramentas (Tools) externas  
-
-### 📌 Boas práticas recomendadas  
-- Modularização  
-- Prompts controlados  
-- Logs e interpretabilidade  
+Função: **`descobrir_aeroporto()`**
 
 ---
 
-## 💻 Como Executar
+## 3️⃣ Busca de Dados Reais (SerpAPI)
 
-### 1. Clone o repositório
+### ✈️ Voos  
+Engine: `google_flights`  
+Função: **`buscar_voos_reais()`**
+
+### 🏨 Hotéis  
+Engine: `google_hotels`  
+Função: **`buscar_hoteis_reais()`**
+
+### 🎡 Atrações  
+Engine: `google`  
+Função: **`pesquisar_atracoes()`**
+
+### 💱 Câmbio  
+Engine: `google`  
+Função: **`buscar_cambio()`**
+
+### 📚 História  
+Engine: `google`  
+Função: **`pesquisar_historia()`**
+
+---
+
+## 4️⃣ Síntese Final do Roteiro (LLM)
+
+O LLM combina:
+
+- Dados reais coletados  
+- Contexto cultural e histórico  
+- Interesses do usuário  
+- Datas planejadas  
+
+Resultado: um **roteiro completo e altamente detalhado**.
+
+Função: **`agente_de_viagens()`**
+
+---
+
+# 📁 Estrutura da Aplicação
+
+├── agente_de_viagens()
+│
+├── gerar_dados_viagem() # LLM: datas + interesses
+├── descobrir_aeroporto() # LLM: código IATA
+│
+├── buscar_voos_reais() # SerpAPI – Google Flights
+├── buscar_hoteis_reais() # SerpAPI – Google Hotels
+├── pesquisar_atracoes() # SerpAPI – Google Search
+├── buscar_cambio() # SerpAPI – Google Search
+├── pesquisar_historia() # SerpAPI – Google Search
+│
+└── síntese final com Gemini
+
+
+---
+
+# 🚀 Como Executar
+
+### 1. Configure suas chaves
 ```bash
-git clone https://github.com/SEU_USUARIO/NOME_REPO.git
-cd NOME_REPO
-```
+export GOOGLE_API_KEY="sua_google_ai_key"
+export SERPAPI_API_KEY="sua_serpapi_key"
 
-### 2. Instale as dependências
-```bash
-pip install -r requirements.txt
-```
 
-### 3. Configure sua API KEY
-```bash
-export GOOGLE_API_KEY="SUA_KEY_AQUI"
-```
+📚 Relação com o Repositório (UFABC – 2025.Q3)
 
-### 4. Execute o agente
-```bash
-python src/agent.py
-```
+Este projeto demonstra, na prática, os conceitos estudados em PLN:
 
----
+Uso de LLMs
 
-## 📜 Licença
+Prompt Engineering
 
-Este projeto segue a licença acadêmica do material base do curso **PLN — UFABC**.
+Orquestração de ferramentas externas
 
----
+Integração com APIs
 
-## ✨ Autor
+Arquitetura modular
 
-Projeto criado por **Gabriel**, com apoio conceitual do repositório-base da disciplina de PLN.
+Aplicações reais de PLN com dados externos
+
+🧑‍💻 Autores
+
+Leandro Cabral e Gabriel Azevedo
+Projeto desenvolvido no contexto do curso de PLN da UFABC.
+
+<p align="center"> <img src="https://img.icons8.com/color/96/airplane-take-off.png" width="90"/> </p>
+
 
 ---
 
-Se quiser adicionar **mais imagens**, **um logo próprio**, **badges personalizadas** ou transformar isso em **documentação completa (mkdocs / sphinx)**, posso gerar tudo para você!
 
