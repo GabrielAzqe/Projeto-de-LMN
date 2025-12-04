@@ -11,9 +11,13 @@
 
 Este projeto implementa um **agente inteligente de viagens**, combinando:
 
-- **LLMs (Google Gemini via LangChain)**
-- **Consultas reais através da SerpAPI**
-- **Orquestração completa para gerar roteiros detalhados**
+- **LLMs (Google Gemini via LangChain)** :LLMs (Google Gemini via LangChain) são modelos avançados de linguagem que, integrados ao LangChain, conseguem entender pedidos, raciocinar passo a passo e usar ferramentas externas para entregar respostas completas e inteligentes.
+
+  
+- **Consultas reais através da SerpAPI**: A SerpAPI é um serviço que permite fazer buscas reais no Google via API, retornando resultados estruturados para serem usados por modelos e pipelines como os do LangChain.
+
+
+- **Orquestração completa para gerar roteiros detalhados** :coordenar todas as etapas, ferramentas e modelos de IA para gerar roteiros detalhados de forma automática, estruturada e coerente de ponta a ponta.
 
 O agente produz:
 
