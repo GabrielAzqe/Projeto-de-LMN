@@ -112,7 +112,7 @@ Função: **`agente_de_viagens()`**
 ├── pesquisar_historia() # SerpAPI – Google Search
 │
 └── síntese final com Gemini
-
+```
 
 ---
 
@@ -123,7 +123,8 @@ Função: **`agente_de_viagens()`**
 export GOOGLE_API_KEY="sua_google_ai_key"
 export SERPAPI_API_KEY="sua_serpapi_key"
 
----
+
+```
 
 # 📚 Relação com o Repositório (UFABC – 2025.Q3)
 
