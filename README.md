@@ -37,11 +37,6 @@ O agente produz:
   <img src="https://iacomcafe.com.br/wp-content/uploads/2024/08/1_q1CkGPwS7g4-f9rNbPrkig.png" width="85%"/>
 </p>
 
-A arquitetura segue **4 grandes etapas**:
-# 🧠 Arquitetura RAG aplicada ao projeto — Explicação Completa
-
-A arquitetura **RAG (Retrieval-Augmented Generation)** combina modelos de linguagem com mecanismos de busca externa, permitindo respostas precisas, contextualizadas e atualizadas.  
-A seguir, cada etapa é explicada de forma estruturada e relacionada diretamente ao seu projeto com **LangChain + SerpAPI + VectorStore**.
 
 
 
