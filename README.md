@@ -43,23 +43,6 @@ A arquitetura segue **4 grandes etapas**:
 A arquitetura **RAG (Retrieval-Augmented Generation)** combina modelos de linguagem com mecanismos de busca externa, permitindo respostas precisas, contextualizadas e atualizadas.  
 A seguir, cada etapa é explicada de forma estruturada e relacionada diretamente ao seu projeto com **LangChain + SerpAPI + VectorStore**.
 
----
-
-# 🎯 Resumo geral aplicado ao projeto
-
-| Etapa | Descrição | Aplicação no Projeto |
-|------|-----------|-----------------------|
-| **1. Ingestão** | Recebe e fragmenta documentos | Chunks dos conteúdos da disciplina | Nesse casos as informações de busca em sites na internete através da SERPAI para alimentar o modelo
-
-| **2. Embeddings + Vetores** | Converte texto em vetores semânticos | Embeddings do LangChain + Vector Store | Através do Langchain essas informações são processadas e vetorizadas por um processo de de codificação pra que seja possivel posteriomente convertelas em linguagem natural
-
-| **3. Retrieval** | Encontra os trechos relevantes | Retriever interno + SerpAPI para buscas reais | relaciona uma base contendo informações padronizadas complementares para alimentar o modelo nesse casso aqui sera a base com informações obtidas na internte através do SEP AI
-
-
-| **4. Augmented Generation** | Gera a resposta usando o contexto | LLM integra documentos + dados reais |
-
----
-
 
 
 ---
