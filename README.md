@@ -99,6 +99,7 @@ Função: **`agente_de_viagens()`**
 
 # 📁 Estrutura da Aplicação
 
+```bash
 ├── agente_de_viagens()
 │
 ├── gerar_dados_viagem() # LLM: datas + interesses
@@ -120,7 +121,7 @@ Função: **`agente_de_viagens()`**
 ### 1. Configure suas chaves
 ```bash
 export GOOGLE_API_KEY="sua_google_ai_key"
-export SERPAPI_API_KEY="sua_serpapi_key" ```
+export SERPAPI_API_KEY="sua_serpapi_key"
 
 ---
 
