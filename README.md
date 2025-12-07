@@ -102,6 +102,134 @@ Função: **`agente_de_viagens()`**
 
 ---
 
+---
+
+# 🧠 Conceitos Teóricos, Fundamentos e Código de PLN Aplicado
+
+## Orquestração e LangChain
+
+O projeto adota uma arquitetura de **Orquestração** e **Pipelining** de agentes. Este é um conceito crucial no desenvolvimento de aplicações com LLMs, pois permite coordenar múltiplos componentes (LLM, APIs externas) para realizar uma tarefa complexa que o LLM sozinho não conseguiria executar de forma confiável ou com dados em tempo real.
+
+### 🛠️ Boas Práticas de Engenharia Aplicadas
+* **Modularidade:** As funções de busca (via SerpAPI) são isoladas, garantindo que cada componente possa ser testado e mantido separadamente, aderindo ao princípio de responsabilidade única.
+* **Chains e Runnables:** O uso de **`RunnableSequence`** no LangChain define um fluxo de execução claro (`Prompt` $\rightarrow$ `LLM`) para as técnicas de PLN, tornando o processamento escalável e rastreável.
+* **Controle de Temperatura:** Ajustamos a `temperature` do LLM de acordo com a tarefa:
+    * **`temperature=0` (Zero Temp):** Usado para tarefas que exigem precisão e fidelidade (PLN, planejamento de datas), garantindo saídas determinísticas.
+    * **`temperature=0.5` (Criativo):** Usado para a geração do roteiro final, permitindo criatividade e fluidez na redação.
+
+---
+
+## Retrieval Augmented Generation (RAG)
+
+O projeto é uma aplicação clássica de **RAG**. Em vez de confiar apenas no conhecimento interno do LLM, a arquitetura primeiro **recupera** (*Retrieval*) dados externos e em tempo real (voos, hotéis, câmbio) via SerpAPI e, em seguida, **aumenta** (*Augmented*) o *prompt* do LLM com esses dados.
+
+* **Vantagem:** Garante que o roteiro final seja baseado em **informações verificáveis, atuais e reais** (preços, datas), superando a limitação de conhecimento estático dos LLMs.
+
+---
+
+## Aplicação das Técnicas de PLN 
+
+O projeto cumpre o requisito de aplicar, no mínimo, **DUAS** técnicas de PLN diretamente no *corpus* obtido através da API, utilizando o LangChain para encadear o prompt e o LLM.
+
+### A. Sumarização de Textos (Técnica 1)
+
+O LLM é instruído a resumir informações extensas sobre história e atrações, transformando dados brutos da web em conteúdo conciso e de fácil consumo para o viajante.
+
+```python
+# Bloco: SUMARIZAÇÃO DE TEXTOS com LangChain
+
+template_sumario = """
+Você receberá um texto sobre turismo (atrações, história, etc.).
+Resuma o conteúdo em até 2 parágrafos, em português simples e claro.
+
+TEXTO:
+{texto}
+"""
+
+prompt_sumario = PromptTemplate(
+    input_variables=["texto"],
+    template=template_sumario
+)
+```
+# A cadeia orquestra o Prompt e o LLM
+cadeia_sumarizacao = RunnableSequence(
+
+
+### C. Extração de Palavras-chave (Técnica 2)
+
+Esta técnica utiliza o LLM para realizar a **extração** de termos relevantes (cultura, gastronomia, atrações) a partir do corpus de dados históricos e turísticos. As palavras-chave obtidas são cruciais, pois são usadas pelo LLM final para validar e justificar a criação do roteiro.
+
+```python
+# Bloco: EXTRAÇÃO DE PALAVRAS-CHAVE com LangChain
+
+template_keywords = """
+Extraia as principais palavras-chave (no máximo 10) do texto abaixo,
+relacionadas a turismo, atrações, cultura, gastronomia e experiências de viagem.
+Responda como uma lista separada por vírgula.
+
+TEXTO:
+{texto}
+"""
+
+prompt_keywords = PromptTemplate(
+    input_variables=["texto"],
+    template=template_keywords
+)
+
+cadeia_keywords = RunnableSequence(
+    prompt_keywords,
+    llm_zero_temp
+)
+
+def extrair_palavras_chave(texto):
+    if not texto or "não encontrada" in texto.lower():
+        return "Sem palavras-chave (texto insuficiente)."
+    resp = cadeia_keywords.invoke({"texto": texto})
+    return resp.content.strip()
+
+```
+### E. Análise de Sentimentos (Técnica 3 - Extra)
+
+O projeto inclui esta técnica para classificar e justificar o sentimento (e.g., MUITO POSITIVO, POSITIVO, NEGATIVO) com base nas descrições ou avaliações de hotéis reais retornadas pela API. Essa análise de PLN permite que o LLM crie um roteiro mais consciente da qualidade das opções de hospedagem, integrando a percepção do viajante final.
+
+```python
+# Bloco: ANÁLISE DE SENTIMENTOS com LangChain
+
+template_sentimento = """
+Você receberá reviews / descrições de hotéis ou atrações.
+
+Classifique o sentimento geral como:
+- MUITO POSITIVO
+- POSITIVO
+- NEUTRO
+- NEGATIVO
+- MUITO NEGATIVO
+
+Explique brevemente o porquê.
+
+TEXTO:
+{texto}
+"""
+
+prompt_sentimento = PromptTemplate(
+    input_variables=["texto"],
+    template=template_sentimento
+)
+
+# A cadeia orquestra o Prompt e o LLM
+cadeia_sentimento = RunnableSequence(
+    prompt_sentimento,
+    llm_zero_temp # LLM com temperatura baixa (0) para classificação objetiva
+)
+
+def analisar_sentimento(texto):
+    if not texto or "Nenhum hotel encontrado" in texto:
+        return "Não há texto suficiente para análise de sentimento."
+    resp = cadeia_sentimento.invoke({"texto": texto})
+    return resp.content
+```
+----
+
 # 📁 Estrutura da Aplicação
 
 ```bash
@@ -147,7 +275,7 @@ Arquitetura modular
 
 Aplicações reais de PLN com dados externos
 
----
+--
 
 # 🧑‍💻 Autores
 
